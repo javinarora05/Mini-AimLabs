@@ -1,5 +1,3 @@
-// Engagement Arcade - event-driven mini game
-
 const board = document.getElementById("board");
 const scoreEl = document.getElementById("score");
 const timeEl = document.getElementById("time");
@@ -55,7 +53,7 @@ function loadHighScores() {
       }
     });
   } catch {
-    // ignore parse errors and fall back to defaults
+    
   }
 }
 
@@ -167,7 +165,7 @@ function endGame() {
   startBtn.disabled = true;
   difficultySelect.disabled = false;
 
-  // update high score for the current difficulty if this run beat it
+  //updating high score
   const difficulty = difficultySelect.value || "medium";
   const currentBest = state.highScores[difficulty] ?? 0;
   if (state.score > currentBest) {
@@ -320,5 +318,6 @@ difficultySelect.addEventListener("change", () => {
 
 loadHighScores();
 resetState();
+
 
 
