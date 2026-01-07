@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AimLabs-mini version</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>AimLabs</h1>
+        <p class="subtitle">
+          Dont blame your setup, <span>work on improving your aim</span>.
+        </p>
+      </header>
+
+      <main class="app-main">
+        <section class="info-panel">
+          <h2>About this project</h2>
+          <p>
+            Engagement Arcade is a fast-paced, browser-based aim and reaction game built using
+            HTML, CSS, and JavaScript. The game challenges players to quickly identify and click
+            dynamically spawning targets within a limited time while maintaining streaks for bonus
+            points and avoiding penalty targets. It features multiple difficulty levels that adjust
+            spawn rates, target lifetimes, and risk, creating an engaging skill-based experience.
+          </p>
+          <p>
+            The project demonstrates core front-end concepts such as event-driven programming,
+            real-time UI updates, animation timing, and complex game state management
+            (start, pause, resume, and game over). A responsive HUD displays score, time, streak,
+            and difficulty, while visual feedback and smooth animations reinforce player actions.
+          </p>
+          <p>
+            This game is inspired by Aim Lab, focusing on improving player precision, reaction
+            time, and consistency through short, repeatable sessions. Engagement Arcade adapts
+            these aim-training principles into a simplified, accessible mini-game designed to
+            showcase interactive gameplay mechanics in the browser.
+          </p>
+        </section>
+
+        <section class="game-panel">
+          <div class="hud">
+            <div class="hud-group">
+              <span class="hud-label">Score</span>
+              <span id="score" class="hud-value">0</span>
+            </div>
+            <div class="hud-group">
+              <span class="hud-label">Time</span>
+              <span id="time" class="hud-value">30</span>
+            </div>
+            <div class="hud-group">
+              <span class="hud-label">Streak</span>
+              <span id="streak" class="hud-value">0</span>
+            </div>
+            <div class="hud-group">
+              <span class="hud-label">High Score</span>
+              <span id="highScore" class="hud-value">0</span>
+            </div>
+            <div class="hud-group">
+              <span class="hud-label">Difficulty</span>
+              <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="board" class="board">
+           
+          </div>
+
+          <div class="controls">
+            <button id="startBtn" class="btn primary">Start</button>
+            <button id="pauseBtn" class="btn" disabled>Pause</button>
+            <button id="resetBtn" class="btn ghost" disabled>Reset</button>
+          </div>
+
+          <div id="status" class="status status-idle">
+            Press <strong>Start</strong> to play. Hit the glowing targets!
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <p>
+         You are fucked now <strong>🙌</strong>. Made by <strong>Javin Arora</strong>
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
