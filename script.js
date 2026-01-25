@@ -53,7 +53,7 @@ function loadHighScores() {
       }
     });
   } catch {
-    
+    console.log("Error loading high scores");
   }
 }
 
@@ -77,6 +77,7 @@ function resetState() {
   );
   startBtn.disabled = false;
   pauseBtn.disabled = true;
+  pauseBtn.textContent = "Pause";
   resetBtn.disabled = true;
 }
 
@@ -165,7 +166,7 @@ function endGame() {
   startBtn.disabled = true;
   difficultySelect.disabled = false;
 
-  //updating high score
+  // updating high score
   const difficulty = difficultySelect.value || "medium";
   const currentBest = state.highScores[difficulty] ?? 0;
   if (state.score > currentBest) {
@@ -208,27 +209,13 @@ function startSpawning() {
   state.timers.spawn = setInterval(spawnTarget, settings.spawnInterval);
 }
 
-function spawnTarget() {
-  if (!state.running || state.paused) return;
-
-  const rect = board.getBoundingClientRect();
-  const margin = 40;
-
-  const x =
-    Math.random() * (rect.width - margin * 2) +
-    margin;
-  const y =
-    Math.random() * (rect.height - margin * 2) +
-    margin;
-
-  const settings = getDifficultySettings();
-  const isPenalty = Math.random() < settings.penaltyChance;
-
+function createTarget(x, y, isPenalty) {
   const target = document.createElement("button");
   target.className = "target" + (isPenalty ? " target-penalty" : "");
   target.style.left = `${x}px`;
   target.style.top = `${y}px`;
   target.setAttribute("aria-label", isPenalty ? "Penalty target" : "Score target");
+  target.dataset.isPenalty = isPenalty.toString();
 
   const glow = document.createElement("div");
   glow.className = "target-glow";
@@ -238,37 +225,54 @@ function spawnTarget() {
   target.appendChild(glow);
   target.appendChild(inner);
 
-  const handleHit = (event) => {
-    event.stopPropagation();
-    target.classList.add("target-hit");
+  return target;
+}
 
-    if (isPenalty) {
-      state.score = Math.max(0, state.score - 5);
-      state.streak = 0;
-      setStatus(
-        "status-active",
-        "Ouch! That was a penalty. Watch for subtle red tones."
-      );
-    } else {
-      const base = 10;
-      state.streak += 1;
-      const bonus = Math.floor(state.streak / 3) * 4;
-      state.score += base + bonus;
-      setStatus(
-        "status-active",
-        `Nice hit! Streak: <strong>${state.streak}</strong> (bonus +${bonus}).`
-      );
-    }
+function handleTargetHit(target) {
+  const isPenalty = target.dataset.isPenalty === "true";
+  target.classList.add("target-hit");
 
-    updateHud();
+  if (isPenalty) {
+    state.score = Math.max(0, state.score - 5);
+    state.streak = 0;
+    setStatus(
+      "status-active",
+      "Ouch! That was a penalty. Watch for subtle red tones."
+    );
+  } else {
+    const base = 10;
+    state.streak += 1;
+    const bonus = Math.floor(state.streak / 3) * 4;
+    state.score += base + bonus;
+    setStatus(
+      "status-active",
+      `Nice hit! Streak: <strong>${state.streak}</strong> (bonus +${bonus}).`
+    );
+  }
 
-    target.removeEventListener("click", handleHit);
-    setTimeout(() => {
-      target.remove();
-    }, 180);
-  };
+  updateHud();
 
-  target.addEventListener("click", handleHit);
+  setTimeout(() => {
+    target.remove();
+  }, 180);
+}
+
+function spawnTarget() {
+  if (!state.running || state.paused) return;
+
+  const rect = board.getBoundingClientRect();
+  const margin = 40;
+
+  const x =
+    Math.random() * (rect.width - margin * 2) +margin;
+  const y =
+    Math.random() * (rect.height - margin * 2) +
+    margin;
+
+  const settings = getDifficultySettings();
+  const isPenalty = Math.random() < settings.penaltyChance;
+
+  const target = createTarget(x, y, isPenalty);
   board.appendChild(target);
 
   const ttl = settings.lifeTime;
@@ -291,12 +295,19 @@ startBtn.addEventListener("click", startGame);
 pauseBtn.addEventListener("click", togglePause);
 resetBtn.addEventListener("click", resetState);
 
-board.addEventListener("click", () => {
+board.addEventListener("click", (event) => {
   if (!state.running || state.paused) return;
-  setStatus(
-    "status-active",
+  
+  const target = event.target.closest(".target");
+  if (target) {
+    event.stopPropagation();
+    handleTargetHit(target);
+  } else {
+    setStatus(
+      "status-active",
     "Click directly on a target’s glow, not the board."
-  );
+    );
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -318,6 +329,4 @@ difficultySelect.addEventListener("change", () => {
 
 loadHighScores();
 resetState();
-
-
 
