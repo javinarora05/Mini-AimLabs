@@ -107,8 +107,8 @@ body {
 }
 
 .app-main {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -214,7 +214,8 @@ body {
 
 .board {
   position: relative;
-  height: 320px;
+  height: 420px;
+  width: 100%;
   border-radius: 20px;
   margin-bottom: 12px;
   background:
@@ -423,20 +424,8 @@ body {
     padding: 18px 16px 14px;
   }
 
-  .app-main {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .info-panel {
-    order: 2;
-  }
-
-  .game-panel {
-    order: 1;
-  }
-
   .board {
-    height: 260px;
+    height: 300px;
   }
 }
 
@@ -450,5 +439,3 @@ body {
     align-items: flex-start;
   }
 }
-
-
