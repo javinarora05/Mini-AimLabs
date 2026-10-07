@@ -1,84 +1,22 @@
 # 🎯 Mini AimLabs
 
-A fast-paced, browser-based aim training game inspired by **Aim Lab**, built using **HTML, CSS, and Vanilla JavaScript**.  
-Designed to improve reaction time, precision, and consistency through short, repeatable gameplay sessions.
+> A browser-based aim trainer focused on reaction speed, precision and repeatable practice sessions.
 
-> *“Don’t blame your setup — work on improving your aim.”*
+## 🎮 Gameplay
+- Moving targets and penalty targets
+- Streak-based bonus scoring
+- 30-second sessions
+- Easy / Medium / Hard
+- Per-difficulty high scores
+- Pause / resume
+- Local persistence
 
----
+## 🧰 Tech
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-## 🚀 Live Preview
-You can run the project locally by simply opening `index.html` in your browser.
+## 🧠 Engineering focus
+Dynamic DOM updates, timers, game state, event handling, scoring and `localStorage`.
 
-*(Optional: add GitHub Pages link here if deployed)*
-
----
-
-## 🕹️ Gameplay Overview
-
-- Click glowing **orange targets** to score points  
-- Avoid **red penalty targets**  
-- Maintain streaks for **bonus points**
-- Play against a **30-second timer**
-- Beat your **high score** per difficulty
-
-The game is intentionally lightweight and fully client-side — no frameworks, no libraries.
-
----
-
-## ⚙️ Features
-
-- 🎯 Dynamic target spawning
-- ⏱️ Real-time countdown timer
-- 🔥 Streak & combo-based scoring system
-- 🚦 Difficulty modes: **Easy / Medium / Hard**
-- 🧠 Penalty targets to increase challenge
-- 💾 High scores saved using `localStorage`
-- ⏸️ Pause / Resume support
-- 📱 Responsive UI for different screen sizes
-- ✨ Smooth animations & visual feedback
-
----
-
-## 🎮 Controls
-
-| Action            | Input            |
-|------------------|------------------|
-| Start Game       | Start button / Spacebar |
-| Pause / Resume   | Pause button / Spacebar |
-| Hit Target       | Mouse click      |
-| Reset Game       | Reset button     |
-
----
-
-## 🧩 Difficulty Settings
-
-| Difficulty | Spawn Rate | Target Lifetime | Penalty Chance |
-|-----------|------------|-----------------|----------------|
-| Easy      | Slow       | Long            | Low            |
-| Medium    | Balanced   | Medium          | Medium         |
-| Hard      | Fast       | Short           | High           |
-
-Each difficulty has its **own high score**, stored locally.
-
----
-
-## 🛠️ Tech Stack
-
-- **HTML5** – Structure & layout  
-- **CSS3** – Styling, animations, responsive design  
-- **JavaScript (ES6)** – Game logic, state management, DOM manipulation  
-
-No external dependencies.
-
----
-
-## 📁 Project Structure
-
-```bash
-Mini-AimLabs/
-│
-├── index.html   # Main HTML structure
-├── style.css    # Styling & animations
-├── script.js    # Game logic & state management
-└── README.md    # Project documentation
+Built by **Javin Arora**.
